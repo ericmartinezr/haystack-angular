@@ -5,7 +5,6 @@ from haystack.dataclasses import ChatMessage
 from haystack.components.builders.chat_prompt_builder import ChatPromptBuilder
 from models.ollama import thinking_generator
 from tools.write import write_todo
-from agents.schema import state
 
 agent = Agent(
     chat_generator=thinking_generator,

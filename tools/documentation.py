@@ -65,8 +65,6 @@ class DocumentationPipeline:
     def run(self, query: str):
         # Indexing pipeline
         index_pipeline = Pipeline(max_runs_per_component=1)
-        # index_pipeline.add_component("cache_checker", CacheChecker(
-        #    document_store=document_store, cache_field="url"))
         index_pipeline.add_component("fetcher", AngularLLMFetcher())
         index_pipeline.add_component(
             "converter", MarkdownToDocument(store_full_path=True))
@@ -152,6 +150,7 @@ documentation_tool = PipelineTool(
         # Mapea el parametro "query" a la variable "query" del componente "builder" y "documentation"
         "query": ["builder.query", "documentation.query"],
     },
+    # TODO: Keeping it just in case...
     # output_mapping={
     #    "generator.replies": "relevant_replies"
     # },
@@ -162,24 +161,3 @@ documentation_tool = PipelineTool(
     name="documentation_tool",
     description="Retrieves documentation and guidelines for Angular development."
 )
-
-
-# documentation_tool = Tool(
-#    parameters={
-#        "type": "object",
-#        "properties": {
-#            "query": {
-#                "type": "string",
-#                "description": "The query to search for in the documentation."
-#            }
-#        }
-#    },
-#    # Toma la variable "relevant_documentation" retornado por la funcion y la guarda en el State
-#    # con el nombre "relevant_documentation"
-#    outputs_to_state={
-#        "relevant_documentation": {"source": "relevant_documentation"}
-#    },
-#    function=documentation_pipeline,
-#    name="documentation_tool",
-#    description="Retrieves documentation and guidelines for Angular development."
-# )

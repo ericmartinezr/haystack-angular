@@ -145,6 +145,7 @@ skill_tool = PipelineTool(
         "query": ["builder.query"],
         # "documentation": ["builder.documentation"]
     },
+    # TODO: Keeping it just in case
     # Mapea la variable del State "relevant_documentation" a la variable "documentation" (parametro del tool)
     # Se crea en documentation.py
     # inputs_from_state={

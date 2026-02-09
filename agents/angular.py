@@ -14,9 +14,6 @@ load_dotenv()
 tracing.tracer.is_content_tracing_enabled = True
 
 
-# TODO
-# Agregar agente que genere y guarde el TODO con el listado de los pasos a seguir
-
 agent = Agent(
     chat_generator=thinking_generator,
     tools=[
@@ -49,20 +46,6 @@ Answer with the path of the TODO file generated.
         "relevant_documentation": {"type": list}
     }
 )
-
-"""
-You're an expert AI agent designed to orchestrate various agents to accomplish complex tasks. 
-You have access to a range of tools that can help you write code, review it and improve it.
-Your task is to analyze the user's request, determine which tools to use, 
-and orchestrate the agents to accomplish the task effectively.
-
-# Workflow
-1. You MUST execute the tool `documentation_tool` exactly ONCE with a concise query to load the relevant Angular documentation.
-2. You MUST provide a detailed query to the tool `create_skill` to process the required SKILLs.
-3. Later provide a detailed query to the tool `todo_tool` to generate a TODO list for the user's request.
-
-Answer with the path of the TODO file generated.
-"""
 
 agent.warm_up()
 
